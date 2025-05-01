@@ -17,11 +17,12 @@ export class ArtistService {
     this.artistsData.set(null);
   }
 
-  searchArtists(q: string) {
+  searchArtists(q: string, page = 1) {
     return this.#httpClient
       .get<{ artists: ArtistPaginatedResponse }>(`${this.baseUrl}/search`, {
         params: {
           q,
+          offset: (page - 1) * 20,
           type: 'artist',
         },
       })

@@ -2,10 +2,11 @@
   position: relative;
   display: flex;
   align-items: center;
-  background-color: var(--background-color);
+  background-color: var(--surface-color);
   border-radius: 1.25rem;
   width: 100%;
   max-width: 450px;
+  margin: 0 auto 24px;
 
   lucide-icon {
     width: 20px;

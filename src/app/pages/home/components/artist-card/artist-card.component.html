@@ -1,10 +1,13 @@
 <div class="artist-card-container">
-  <img
-    [src]="artist.images?.[0]?.url"
-    [alt]="artist.name"
-    height="175"
-    width="175"
-  />
+  <div class="artist-img-container">
+    <img
+      *ngIf="artist.images?.[0]?.url"
+      [src]="artist.images?.[0]?.url"
+      [alt]="artist.name"
+    />
+
+    <span *ngIf="!artist.images?.[0]?.url">{{ artist.name.charAt(0) }}</span>
+  </div>
 
   <p>{{ artist.name }}</p>
 </div>

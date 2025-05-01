@@ -53,7 +53,7 @@ h6 {
   --primary-color: #f44336;
   --secondary-color: #673ab7;
   --background-color: #fff;
-  --surface-color: #dddddd;
+  --surface-color: #ececec;
   --foreground-color: #333;
   --btn-hover-color: #0002;
   --border-color: #bbbbbb;
@@ -71,7 +71,8 @@ lucide-icon {
   color: var(--foreground-color);
 }
 
-input {
+input,
+button {
   color: var(--foreground-color);
 }
 
@@ -88,5 +89,10 @@ input {
   &:hover {
     cursor: pointer;
     background-color: var(--btn-hover-color);
+  }
+
+  &:disabled {
+    opacity: 0.25;
+    pointer-events: none;
   }
 }

@@ -1,4 +1,6 @@
 <div class="home-container">
+  <app-search-bar style="display: contents" />
+
   <h4>Artistas</h4>
 
   <p *ngIf="!artistsData()">Carregando...</p>
@@ -9,4 +11,10 @@
       [artist]="artist"
     />
   </div>
+
+  <app-pagination
+    *ngIf="artistsData() as data"
+    [total]="data.total"
+    [limit]="data.limit"
+  />
 </div>

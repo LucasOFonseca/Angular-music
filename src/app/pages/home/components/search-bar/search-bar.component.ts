@@ -23,7 +23,7 @@ export class SearchBarComponent {
   constructor(private router: Router, private activatedRoute: ActivatedRoute) {
     this.activatedRoute.queryParamMap.subscribe((params) => {
       const q = params.get('q');
-      if (q && q !== this.form.get('search')?.value) {
+      if (q && decodeURIComponent(q) !== this.form.get('search')?.value) {
         this.form.get('search')?.patchValue(decodeURIComponent(q));
       }
     });
@@ -36,7 +36,9 @@ export class SearchBarComponent {
           relativeTo: this.activatedRoute,
           queryParams: {
             q: value !== '' ? encodeURIComponent(value ?? '') : null,
+            page: value !== '' ? 1 : null,
           },
+          queryParamsHandling: 'merge',
         })
       );
   }
