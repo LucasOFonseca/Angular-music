@@ -7,6 +7,11 @@ const routes: Routes = [
     loadComponent: () =>
       import('./pages/home/home.component').then((c) => c.HomeComponent),
   },
+  {
+    path: 'artist/:id',
+    loadComponent: () =>
+      import('./pages/artist/artist.component').then((c) => c.ArtistComponent),
+  },
 ];
 
 @NgModule({

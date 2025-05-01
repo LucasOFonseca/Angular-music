@@ -1,4 +1,4 @@
-<div class="artist-card-container">
+<div class="artist-card-container" role="button" (click)="goToDetails()">
   <div class="artist-img-container">
     <img
       *ngIf="artist.images?.[0]?.url"

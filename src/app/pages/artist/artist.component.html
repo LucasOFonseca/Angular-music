@@ -1,0 +1,28 @@
+<div class="artist-container">
+  <div class="cover">
+    <h1>{{ artist()?.name }}</h1>
+
+    <div class="cover-bottom-info">
+      <span>{{ artist()?.followers?.total ?? 0 | followers }} seguidores</span>
+      <span>Popularidade: {{ artist()?.popularity }}</span>
+    </div>
+
+    <div class="artist-img-container">
+      <img
+        *ngIf="artist()?.images?.[0]?.url"
+        [src]="artist()?.images?.[0]?.url"
+        [alt]="artist()?.name"
+      />
+
+      <span *ngIf="!artist()?.images?.[0]?.url">{{
+        artist()?.name?.charAt(0)
+      }}</span>
+    </div>
+  </div>
+
+  <div class="content-container">
+    <p class="genres">
+      {{ genres | titlecase }}
+    </p>
+  </div>
+</div>
