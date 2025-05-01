@@ -1,0 +1,12 @@
+<div class="home-container">
+  <h4>Artistas</h4>
+
+  <p *ngIf="!artistsData()">Carregando...</p>
+
+  <div class="artist-cards-section" *ngIf="artistsData() as data">
+    <app-artist-card
+      *ngFor="let artist of data.items; trackBy: trackByArtist"
+      [artist]="artist"
+    />
+  </div>
+</div>
