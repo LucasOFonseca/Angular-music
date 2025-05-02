@@ -11,7 +11,7 @@
   .content-container {
     width: 100%;
     background-color: var(--background-color);
-    padding-top: 112px;
+    padding: 112px 16px 24px;
   }
 }
 
@@ -27,6 +27,25 @@
   h1 {
     font-size: 4rem;
     color: #fff;
+    text-align: center;
+  }
+
+  @media screen and (max-width: 720px) {
+    height: 200px;
+
+    h1 {
+      font-size: 2rem;
+    }
+  }
+
+  .icon-button {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+
+    lucide-icon {
+      color: #fff;
+    }
   }
 
   .cover-bottom-info {
@@ -38,6 +57,25 @@
     align-items: center;
     color: #fff;
     padding: 0 16px;
+
+    .spotify-btn {
+      border: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 18px;
+      font-weight: 600;
+      background-color: #10ad47;
+      color: #fff;
+
+      transition: background-color 0.2s ease-in-out;
+
+      &:hover {
+        cursor: pointer;
+        background-color: #0c7930;
+      }
+    }
   }
 
   .artist-img-container {
@@ -53,6 +91,12 @@
     align-items: center;
     background: var(--secondary-color);
     box-shadow: 0px 3px 20px 0px rgba(0, 0, 0, 0.75);
+
+    @media screen and (max-width: 600px) {
+      width: 100px;
+      height: 100px;
+      left: calc(50% - 50px);
+    }
 
     img {
       border-radius: 50%;

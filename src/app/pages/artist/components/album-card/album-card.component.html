@@ -1,0 +1,25 @@
+<div class="album-card-container">
+  <div class="album-cover-container">
+    <img
+      *ngIf="album.images?.[0]?.url"
+      [src]="album.images?.[0]?.url"
+      [alt]="album.name"
+    />
+
+    <lucide-icon
+      *ngIf="!album.images?.[0]?.url"
+      [img]="DiscAlbumIcon"
+      size="100"
+    />
+  </div>
+
+  <h6>{{ album.name }}</h6>
+
+  <div class="info-line">
+    <p class="album-info">
+      {{ album.release_date.split("-")[0] }}
+    </p>
+
+    <p class="album-info">{{ album.total_tracks }} faixas</p>
+  </div>
+</div>

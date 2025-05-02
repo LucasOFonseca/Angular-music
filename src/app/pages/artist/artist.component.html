@@ -1,10 +1,24 @@
 <div class="artist-container">
   <div class="cover">
+    <button class="icon-button" (click)="back()">
+      <lucide-icon [img]="ArrowLeftIcon" />
+    </button>
+
     <h1>{{ artist()?.name }}</h1>
 
     <div class="cover-bottom-info">
       <span>{{ artist()?.followers?.total ?? 0 | followers }} seguidores</span>
-      <span>Popularidade: {{ artist()?.popularity }}</span>
+
+      <button class="spotify-btn" (click)="openSpotify()">
+        <img
+          src="/assets/spotify-icon.svg"
+          alt="Spotify"
+          width="20"
+          height="20"
+        />
+
+        <span>Ver no Spotify</span>
+      </button>
     </div>
 
     <div class="artist-img-container">
@@ -24,5 +38,7 @@
     <p class="genres">
       {{ genres | titlecase }}
     </p>
+
+    <app-artist-albums-section />
   </div>
 </div>

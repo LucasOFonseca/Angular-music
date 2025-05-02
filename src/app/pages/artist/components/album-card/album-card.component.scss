@@ -1,0 +1,60 @@
+.album-card-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 250px;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  transition: box-shadow 0.3s ease, transform 0.3s ease-in-out;
+
+  &:hover {
+    cursor: pointer;
+    transform-origin: center bottom;
+    transform: translateY(-8px) scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 8px 24px rgba(0, 0, 0, 0.35);
+  }
+}
+
+.album-cover-container {
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(
+    45deg,
+    var(--primary-color),
+    var(--secondary-color)
+  );
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+
+  span {
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: #fff;
+  }
+}
+
+h6 {
+  margin: 8px 0;
+}
+
+.info-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.album-info {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--secondary-text);
+}

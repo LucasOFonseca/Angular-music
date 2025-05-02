@@ -51,6 +51,7 @@ h6 {
 
 :root {
   --primary-color: #f44336;
+  --primary-dark-color: #b6332a;
   --secondary-color: #673ab7;
   --background-color: #fff;
   --surface-color: #ececec;
@@ -90,6 +91,29 @@ button {
   &:hover {
     cursor: pointer;
     background-color: var(--btn-hover-color);
+  }
+
+  &:disabled {
+    opacity: 0.25;
+    pointer-events: none;
+  }
+}
+
+.primary-button {
+  height: 40px;
+  border-radius: 20px;
+  border: none;
+  padding: 8px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  background-color: var(--primary-color);
+  color: #fff;
+
+  transition: background-color 0.2s ease-in-out;
+
+  &:hover {
+    cursor: pointer;
+    background-color: var(--primary-dark-color);
   }
 
   &:disabled {

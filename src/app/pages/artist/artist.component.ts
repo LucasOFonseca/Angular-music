@@ -1,18 +1,28 @@
 import { NgIf, TitleCasePipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ArrowLeftIcon, LucideAngularModule } from 'lucide-angular';
 import { FollowersPipe } from 'src/app/shared/pipes/followers.pipe';
+import { ArtistAlbumsSectionComponent } from './components/artist-albums-section/artist-albums-section.component';
 import { ArtistDetailsService } from './services/artist-details.service';
 
 @Component({
   selector: 'app-artist',
   standalone: true,
-  imports: [NgIf, TitleCasePipe, FollowersPipe],
+  imports: [
+    NgIf,
+    TitleCasePipe,
+    FollowersPipe,
+    LucideAngularModule,
+    ArtistAlbumsSectionComponent,
+  ],
   templateUrl: './artist.component.html',
   styleUrls: ['./artist.component.scss'],
 })
 export class ArtistComponent {
   readonly #artistDetailsService = inject(ArtistDetailsService);
+
+  readonly ArrowLeftIcon = ArrowLeftIcon;
 
   readonly id = this.activatedRoute.snapshot.paramMap.get('id');
   readonly artist = this.#artistDetailsService.artist;
@@ -28,5 +38,13 @@ export class ArtistComponent {
         this.genres = this.artist()?.genres.join(' | ') || '';
       });
     }
+  }
+
+  back() {
+    window.history.back();
+  }
+
+  openSpotify() {
+    window.open(this.artist()?.uri, '_blank');
   }
 }

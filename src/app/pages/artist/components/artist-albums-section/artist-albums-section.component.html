@@ -1,0 +1,17 @@
+<h4>Álbuns</h4>
+
+<div class="album-cards-section" *ngIf="albums$ | async">
+  <app-album-card
+    *ngFor="let album of albums()?.items; trackBy: trackByAlbum"
+    style="display: contents"
+    [album]="album"
+  />
+</div>
+
+<div *ngIf="albums()?.next" class="bnt-container">
+  <button *ngIf="!isLoading" class="primary-button" (click)="loadMore()">
+    Ver mais
+  </button>
+
+  <app-circular-loading *ngIf="isLoading" />
+</div>
