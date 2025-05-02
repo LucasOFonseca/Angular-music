@@ -1,0 +1,43 @@
+<div class="album-container">
+  <div
+    class="cover"
+    [style]="{ 'background-image': 'url(' + album()?.images?.[0]?.url + ')' }"
+  >
+    <div *ngIf="album()?.images?.[0]?.url" class="img-container">
+      <img [src]="album()?.images?.[0]?.url" [alt]="album()?.name" />
+    </div>
+  </div>
+
+  <div class="content">
+    <h1>{{ album()?.name }}</h1>
+
+    <div class="album-info">
+      <p>
+        <strong>Por: </strong>
+
+        <ng-container *ngFor="let artist of album()?.artists; let last = last">
+          <span class="artist-name" (click)="goToArtist(artist.id)">{{
+            artist.name
+          }}</span>
+
+          <span *ngIf="!last">, </span>
+        </ng-container>
+      </p>
+
+      <p>
+        <strong>Lançado em: </strong>
+
+        {{ album()?.release_date?.split("-")?.[0] }}
+      </p>
+    </div>
+
+    <h5>Faixas ({{ album()?.total_tracks }})</h5>
+
+    <hr />
+
+    <app-track-item
+      *ngFor="let track of album()?.tracks?.items"
+      [track]="track"
+    />
+  </div>
+</div>

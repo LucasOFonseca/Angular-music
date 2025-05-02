@@ -1,0 +1,70 @@
+.track-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 8px;
+  border-bottom: 1px solid var(--border-color);
+
+  .img-container {
+    position: relative;
+    width: 40px;
+    min-width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(
+      45deg,
+      var(--primary-color),
+      var(--secondary-color)
+    );
+
+    lucide-icon {
+      color: #fff;
+    }
+  }
+
+  .track-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 8px;
+
+    .duration-container {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      .duration {
+        color: var(--secondary-text);
+      }
+
+      .spotify-btn {
+        border: none;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 4px 8px;
+        border-radius: 18px;
+        font-weight: 600;
+        background-color: #10ad47;
+        color: #fff;
+
+        transition: background-color 0.2s ease-in-out;
+
+        &:hover {
+          cursor: pointer;
+          background-color: #0c7930;
+        }
+      }
+    }
+
+    @media screen and (max-width: 600px) {
+      p {
+        font-size: 0.875rem;
+      }
+    }
+  }
+}

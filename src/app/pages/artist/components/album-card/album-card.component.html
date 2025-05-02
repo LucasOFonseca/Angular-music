@@ -1,4 +1,4 @@
-<div class="album-card-container">
+<div class="album-card-container" role="button" (click)="openAlbum()">
   <div class="album-cover-container">
     <img
       *ngIf="album.images?.[0]?.url"
