@@ -2,8 +2,13 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 16px 8px;
+  padding: 8px;
   border-bottom: 1px solid var(--border-color);
+
+  & > span {
+    width: 24px;
+    text-align: right;
+  }
 
   .img-container {
     position: relative;
@@ -46,7 +51,7 @@
         display: flex;
         align-items: center;
         gap: 8px;
-        padding: 4px 8px;
+        padding: 4px 8px 4px 4px;
         border-radius: 18px;
         font-weight: 600;
         background-color: #10ad47;

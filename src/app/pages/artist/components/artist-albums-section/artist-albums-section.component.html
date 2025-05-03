@@ -6,6 +6,14 @@
     style="display: contents"
     [album]="album"
   />
+
+  <div *ngIf="albums()?.next" class="bnt-container">
+    <button *ngIf="!isLoading" class="primary-button" (click)="loadMore()">
+      Ver mais
+    </button>
+
+    <app-circular-loading *ngIf="isLoading" />
+  </div>
 </div>
 
 <div *ngIf="albums()?.next" class="bnt-container">

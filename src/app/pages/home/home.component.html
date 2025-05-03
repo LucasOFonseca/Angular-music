@@ -1,20 +1,47 @@
 <div class="home-container">
   <app-search-bar style="display: contents" />
 
-  <h4>Artistas</h4>
+  <ng-container *ngIf="!artistsData()">
+    <ng-container *ngIf="recentlyArtists() as data">
+      <h4>Vistos recentemente</h4>
 
-  <p *ngIf="!artistsData()">Carregando...</p>
+      <div class="artist-recommendations">
+        <app-artist-card
+          *ngFor="let artist of data; trackBy: trackByArtist"
+          [artist]="artist"
+        />
+      </div>
 
-  <div class="artist-cards-section" *ngIf="artistsData() as data">
-    <app-artist-card
-      *ngFor="let artist of data.items; trackBy: trackByArtist"
-      [artist]="artist"
-    />
-  </div>
+      <h4>Você pode gostar</h4>
 
-  <app-pagination
-    *ngIf="artistsData() as data"
-    [total]="data.total"
-    [limit]="data.limit"
-  />
+      <div class="artist-recommendations">
+        <app-artist-card
+          *ngFor="let artist of relatedArtists(); trackBy: trackByArtist"
+          [artist]="artist"
+        />
+      </div>
+    </ng-container>
+
+    <h4>Artistas populares</h4>
+
+    <div class="artist-recommendations">
+      <app-artist-card
+        *ngFor="let artist of popularArtists(); trackBy: trackByArtist"
+        [artist]="artist"
+      />
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="artistsData() as data">
+    <h4>Artistas</h4>
+
+    <div class="artist-cards-section">
+      <app-artist-card
+        *ngFor="let artist of data.items; trackBy: trackByArtist"
+        [artist]="artist"
+      />
+    </div>
+
+    <app-pagination [total]="data.total" [limit]="data.limit" />
+  </ng-container>
 </div>

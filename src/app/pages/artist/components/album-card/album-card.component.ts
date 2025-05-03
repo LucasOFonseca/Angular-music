@@ -1,6 +1,6 @@
 import { NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DiscAlbumIcon, LucideAngularModule } from 'lucide-angular';
 import { SimplifiedAlbum } from 'src/app/shared/models/album.model';
 
@@ -16,9 +16,14 @@ export class AlbumCardComponent {
 
   @Input() album!: SimplifiedAlbum;
 
-  constructor(private router: Router) {}
+  readonly artistId = this.activatedRoute.snapshot.paramMap.get('id');
+
+  constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
 
   openAlbum() {
-    this.router.navigate(['album', this.album.id]);
+    this.router.navigate(['album', this.album.id], {
+      queryParams: { artist: this.artistId },
+      queryParamsHandling: 'merge',
+    });
   }
 }

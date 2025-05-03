@@ -4,10 +4,37 @@
   justify-content: center;
   gap: 32px;
   margin-top: 16px;
+
+  .bnt-container {
+    display: none;
+  }
 }
 
 .bnt-container {
   display: flex;
   justify-content: center;
   margin: 32px auto 0;
+}
+
+h4 {
+  margin-top: 32px;
+}
+
+@media screen and (max-width: 900px) {
+  .bnt-container {
+    display: none;
+  }
+
+  .album-cards-section {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+    gap: 32px 16px;
+
+    .bnt-container {
+      display: flex;
+      align-self: center;
+      min-width: max-content;
+    }
+  }
 }

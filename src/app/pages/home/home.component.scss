@@ -5,10 +5,33 @@
   padding: 24px 16px;
 }
 
+.artist-recommendations {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 32px;
+  margin: 16px 0 32px;
+}
+
 .artist-cards-section {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 32px;
   margin-top: 16px;
+}
+
+@media screen and (max-width: 1200px) {
+  .artist-recommendations {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+    gap: 16px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .artist-cards-section {
+    gap: 32px 16px;
+  }
 }

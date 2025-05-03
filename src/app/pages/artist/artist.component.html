@@ -39,6 +39,16 @@
       {{ genres | titlecase }}
     </p>
 
+    <h4>Top 10 do artista</h4>
+
+    <hr />
+
+    <app-track-item
+      *ngFor="let track of topTracks(); let i = index"
+      [trackNumber]="i + 1"
+      [track]="track"
+    />
+
     <app-artist-albums-section />
   </div>
 </div>

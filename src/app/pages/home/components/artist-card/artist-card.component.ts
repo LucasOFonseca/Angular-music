@@ -20,6 +20,8 @@ export class ArtistCardComponent {
 
   goToDetails() {
     this.#artistDetailsService.setArtistDetails(this.artist);
-    this.router.navigate(['artist', this.artist.id]);
+    this.router.navigate(['artist', this.artist.id], {
+      queryParamsHandling: 'preserve',
+    });
   }
 }

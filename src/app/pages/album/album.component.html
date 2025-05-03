@@ -3,6 +3,10 @@
     class="cover"
     [style]="{ 'background-image': 'url(' + album()?.images?.[0]?.url + ')' }"
   >
+    <button class="icon-button" (click)="back()">
+      <lucide-icon [img]="ArrowLeftIcon" />
+    </button>
+
     <div *ngIf="album()?.images?.[0]?.url" class="img-container">
       <img [src]="album()?.images?.[0]?.url" [alt]="album()?.name" />
     </div>
@@ -36,8 +40,21 @@
     <hr />
 
     <app-track-item
-      *ngFor="let track of album()?.tracks?.items"
+      *ngFor="let track of album()?.tracks?.items; let i = index"
+      [trackNumber]="i + 1"
       [track]="track"
     />
+
+    <div *ngIf="album()?.tracks?.next" class="bnt-container">
+      <button
+        *ngIf="!isLoadingTracks"
+        class="primary-button"
+        (click)="loadMoreTracks()"
+      >
+        Ver mais
+      </button>
+
+      <app-circular-loading *ngIf="isLoadingTracks" />
+    </div>
   </div>
 </div>

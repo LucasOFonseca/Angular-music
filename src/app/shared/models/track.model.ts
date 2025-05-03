@@ -1,3 +1,4 @@
+import { SimplifiedAlbum } from './album.model';
 import { SimplifiedArtist } from './artist.model';
 
 export interface LinkedFrom {
@@ -32,4 +33,14 @@ export interface SimplifiedTrack {
   type: string;
   uri: string;
   is_local: boolean;
+}
+
+export interface Track extends SimplifiedTrack {
+  album: SimplifiedAlbum;
+  external_ids: {
+    isrc: string;
+    ean: string;
+    upc: string;
+  };
+  popularity: number;
 }

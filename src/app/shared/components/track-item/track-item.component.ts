@@ -14,6 +14,7 @@ export class TrackItemComponent {
   readonly Music2Icon = Music2Icon;
 
   @Input() track!: SimplifiedTrack;
+  @Input() trackNumber!: number;
 
   openSpotify() {
     window.open(this.track.uri, '_blank');

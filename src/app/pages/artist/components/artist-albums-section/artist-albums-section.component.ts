@@ -3,7 +3,6 @@ import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SimplifiedAlbum } from 'src/app/shared/models/album.model';
 import { CircularLoadingComponent } from '../../../../shared/components/circular-loading/circular-loading.component';
-import { PaginationComponent } from '../../../../shared/components/pagination/pagination.component';
 import { ArtistAlbumsService } from '../../services/artist-albums.service';
 import { AlbumCardComponent } from '../album-card/album-card.component';
 
@@ -12,7 +11,6 @@ import { AlbumCardComponent } from '../album-card/album-card.component';
   standalone: true,
   imports: [
     AlbumCardComponent,
-    PaginationComponent,
     NgIf,
     NgFor,
     AsyncPipe,
