@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ArrowLeftIcon, LucideAngularModule } from 'lucide-angular';
 import { FollowersPipe } from 'src/app/shared/pipes/followers.pipe';
 import { RecentlyArtistsService } from 'src/app/shared/services/recently-artists.service';
+import { TrackItemSkeletonComponent } from '../../shared/components/track-item-skeleton/track-item-skeleton.component';
 import { TrackItemComponent } from '../../shared/components/track-item/track-item.component';
 import { ArtistAlbumsSectionComponent } from './components/artist-albums-section/artist-albums-section.component';
 import { ArtistDetailsService } from './services/artist-details.service';
@@ -20,6 +21,7 @@ import { ArtistTopTracksService } from './services/artist-top-tracks.service';
     LucideAngularModule,
     ArtistAlbumsSectionComponent,
     TrackItemComponent,
+    TrackItemSkeletonComponent,
   ],
   templateUrl: './artist.component.html',
   styleUrls: ['./artist.component.scss'],
@@ -34,6 +36,7 @@ export class ArtistComponent {
   readonly id = this.activatedRoute.snapshot.paramMap.get('id');
   readonly artist = this.#artistDetailsService.artist;
   readonly topTracks = this.#artistTopTracksService.topTracks;
+  isLoadingTopTracks = false;
 
   genres = '';
 
@@ -53,7 +56,11 @@ export class ArtistComponent {
         });
       }
 
-      this.#artistTopTracksService.getArtistTopTracks(this.id).subscribe();
+      this.isLoadingTopTracks = true;
+
+      this.#artistTopTracksService
+        .getArtistTopTracks(this.id)
+        .subscribe({ complete: () => (this.isLoadingTopTracks = false) });
     }
   }
 

@@ -6,29 +6,59 @@
       <h4>Vistos recentemente</h4>
 
       <div class="artist-recommendations">
-        <app-artist-card
-          *ngFor="let artist of data; trackBy: trackByArtist"
-          [artist]="artist"
-        />
+        <ng-container *ngIf="isLoadingRecentlyArtists">
+          <app-card-skeleton
+            *ngFor="let i of [1, 2, 3, 4, 5]"
+            width="207px"
+            height="231px"
+          />
+        </ng-container>
+
+        <ng-container *ngIf="!isLoadingRecentlyArtists">
+          <app-artist-card
+            *ngFor="let artist of data; trackBy: trackByArtist"
+            [artist]="artist"
+          />
+        </ng-container>
       </div>
 
       <h4>Você pode gostar</h4>
 
       <div class="artist-recommendations">
-        <app-artist-card
-          *ngFor="let artist of relatedArtists(); trackBy: trackByArtist"
-          [artist]="artist"
-        />
+        <ng-container *ngIf="isLoadingRelatedArtists">
+          <app-card-skeleton
+            *ngFor="let i of [1, 2, 3, 4, 5]"
+            width="207px"
+            height="231px"
+          />
+        </ng-container>
+
+        <ng-container *ngIf="!isLoadingRelatedArtists">
+          <app-artist-card
+            *ngFor="let artist of relatedArtists(); trackBy: trackByArtist"
+            [artist]="artist"
+          />
+        </ng-container>
       </div>
     </ng-container>
 
     <h4>Artistas populares</h4>
 
     <div class="artist-recommendations">
-      <app-artist-card
-        *ngFor="let artist of popularArtists(); trackBy: trackByArtist"
-        [artist]="artist"
-      />
+      <ng-container *ngIf="isLoadingPopularArtists">
+        <app-card-skeleton
+          *ngFor="let i of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]"
+          width="207px"
+          height="231px"
+        />
+      </ng-container>
+
+      <ng-container *ngIf="!isLoadingPopularArtists">
+        <app-artist-card
+          *ngFor="let artist of popularArtists(); trackBy: trackByArtist"
+          [artist]="artist"
+        />
+      </ng-container>
     </div>
   </ng-container>
 
@@ -36,10 +66,20 @@
     <h4>Artistas</h4>
 
     <div class="artist-cards-section">
-      <app-artist-card
-        *ngFor="let artist of data.items; trackBy: trackByArtist"
-        [artist]="artist"
-      />
+      <ng-container *ngIf="isLoadingArtists">
+        <app-card-skeleton
+          *ngFor="let i of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]"
+          width="207px"
+          height="231px"
+        />
+      </ng-container>
+
+      <ng-container *ngIf="!isLoadingArtists">
+        <app-artist-card
+          *ngFor="let artist of data.items; trackBy: trackByArtist"
+          [artist]="artist"
+        />
+      </ng-container>
     </div>
 
     <app-pagination [total]="data.total" [limit]="data.limit" />

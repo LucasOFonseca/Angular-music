@@ -3,6 +3,7 @@ import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ArrowLeftIcon, LucideAngularModule } from 'lucide-angular';
 import { CircularLoadingComponent } from '../../shared/components/circular-loading/circular-loading.component';
+import { TrackItemSkeletonComponent } from '../../shared/components/track-item-skeleton/track-item-skeleton.component';
 import { TrackItemComponent } from '../../shared/components/track-item/track-item.component';
 import { AlbumService } from './services/album.service';
 
@@ -15,6 +16,7 @@ import { AlbumService } from './services/album.service';
     TrackItemComponent,
     LucideAngularModule,
     CircularLoadingComponent,
+    TrackItemSkeletonComponent,
   ],
   templateUrl: './album.component.html',
   styleUrls: ['./album.component.scss'],
@@ -27,13 +29,18 @@ export class AlbumComponent {
   readonly id = this.activatedRoute.snapshot.paramMap.get('id');
   readonly artistId = this.activatedRoute.snapshot.queryParamMap.get('artist');
   readonly album = this.#albumService.album;
+  isLoadingAlbum = false;
   isLoadingTracks = false;
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
 
   ngOnInit() {
     if (this.id) {
-      this.#albumService.getAlbum(this.id).subscribe();
+      this.isLoadingAlbum = true;
+
+      this.#albumService
+        .getAlbum(this.id)
+        .subscribe({ complete: () => (this.isLoadingAlbum = false) });
     }
   }
 

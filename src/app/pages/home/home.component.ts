@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ArtistService } from 'src/app/shared/services/artist.service';
 import { RecentlyArtistsService } from 'src/app/shared/services/recently-artists.service';
+import { CardSkeletonComponent } from '../../shared/components/card-skeleton/card-skeleton.component';
 import { PaginationComponent } from '../../shared/components/pagination/pagination.component';
 import { ArtistCardComponent } from './components/artist-card/artist-card.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
@@ -16,6 +17,7 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
     ArtistCardComponent,
     SearchBarComponent,
     PaginationComponent,
+    CardSkeletonComponent,
   ],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
@@ -26,9 +28,16 @@ export class HomeComponent {
   readonly #recentlyArtistsService = inject(RecentlyArtistsService);
 
   readonly artistsData = this.#artistService.artistsData;
+  isLoadingArtists = false;
+
   readonly popularArtists = this.#artistService.popularArtists;
+  isLoadingPopularArtists = false;
+
   readonly recentlyArtists = this.#recentlyArtistsService.recentlyArtists;
+  isLoadingRecentlyArtists = false;
+
   readonly relatedArtists = this.#recentlyArtistsService.relatedArtists;
+  isLoadingRelatedArtists = false;
 
   constructor(private activatedRoute: ActivatedRoute) {
     this.activatedRoute.queryParamMap.subscribe((params) => {
@@ -36,17 +45,34 @@ export class HomeComponent {
       const page = params.get('page');
 
       if (q) {
-        this.#artistService.searchArtists(q, Number(page)).subscribe();
+        this.isLoadingArtists = true;
+
+        this.#artistService
+          .searchArtists(q, Number(page))
+          .subscribe({ complete: () => (this.isLoadingArtists = false) });
       } else this.#artistService.cleanArtistsData();
     });
   }
 
   ngOnInit() {
-    this.#artistService.getPopularArtists().subscribe();
+    this.isLoadingPopularArtists = true;
+
+    this.#artistService
+      .getPopularArtists()
+      .subscribe({ complete: () => (this.isLoadingPopularArtists = false) });
 
     if (this.#recentlyArtistsService.hasRecentlyArtists()) {
-      this.#recentlyArtistsService.getArtists().subscribe(() => {
-        this.#recentlyArtistsService.getRelatedArtists().subscribe();
+      this.isLoadingRecentlyArtists = true;
+
+      this.#recentlyArtistsService.getArtists().subscribe({
+        complete: () => (this.isLoadingRecentlyArtists = false),
+        next: () => {
+          this.isLoadingRelatedArtists = true;
+
+          this.#recentlyArtistsService.getRelatedArtists().subscribe({
+            complete: () => (this.isLoadingRelatedArtists = false),
+          });
+        },
       });
     }
   }

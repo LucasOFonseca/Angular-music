@@ -1,0 +1,14 @@
+.skeleton {
+  border-radius: 8px;
+  background-color: var(--surface-color);
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.5;
+  }
+}

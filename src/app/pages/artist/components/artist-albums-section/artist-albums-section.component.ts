@@ -2,6 +2,7 @@ import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SimplifiedAlbum } from 'src/app/shared/models/album.model';
+import { CardSkeletonComponent } from '../../../../shared/components/card-skeleton/card-skeleton.component';
 import { CircularLoadingComponent } from '../../../../shared/components/circular-loading/circular-loading.component';
 import { ArtistAlbumsService } from '../../services/artist-albums.service';
 import { AlbumCardComponent } from '../album-card/album-card.component';
@@ -15,6 +16,7 @@ import { AlbumCardComponent } from '../album-card/album-card.component';
     NgFor,
     AsyncPipe,
     CircularLoadingComponent,
+    CardSkeletonComponent,
   ],
   templateUrl: './artist-albums-section.component.html',
   styleUrls: ['./artist-albums-section.component.scss'],
@@ -26,7 +28,8 @@ export class ArtistAlbumsSectionComponent {
 
   albums$ = this.#artistAlbumsService.getArtistAlbums(this.artistId);
   albums = this.#artistAlbumsService.albums;
-  isLoading = false;
+  isLoadingAlbums = this.#artistAlbumsService.isLoading;
+  isLoadingMore = false;
 
   constructor(private activatedRoute: ActivatedRoute) {}
 
@@ -35,10 +38,10 @@ export class ArtistAlbumsSectionComponent {
   }
 
   loadMore() {
-    this.isLoading = true;
+    this.isLoadingMore = true;
 
     this.#artistAlbumsService.getNext().subscribe({
-      complete: () => (this.isLoading = false),
+      complete: () => (this.isLoadingMore = false),
     });
   }
 }

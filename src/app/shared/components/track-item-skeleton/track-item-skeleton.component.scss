@@ -1,0 +1,64 @@
+.track-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  border-bottom: 1px solid var(--border-color);
+
+  .track-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 8px;
+
+    .duration-container {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+  }
+}
+
+.skeleton {
+  border-radius: 8px;
+  background-color: var(--surface-color);
+  animation: pulse 1s infinite;
+}
+
+.number {
+  width: 24px;
+  height: 24px;
+}
+
+.icon {
+  width: 40px;
+  height: 40px;
+}
+
+.name {
+  width: 85px;
+  height: 20px;
+  border-radius: 10px;
+}
+
+.duration {
+  width: 35px;
+  height: 20px;
+  border-radius: 10px;
+}
+
+.spotify-btn {
+  width: 74px;
+  height: 28px;
+  border-radius: 14px;
+}
+
+@keyframes pulse {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.5;
+  }
+}

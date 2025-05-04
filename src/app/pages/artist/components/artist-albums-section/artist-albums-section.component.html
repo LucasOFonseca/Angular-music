@@ -1,25 +1,35 @@
 <h4>Álbuns</h4>
 
-<div class="album-cards-section" *ngIf="albums$ | async">
-  <app-album-card
-    *ngFor="let album of albums()?.items; trackBy: trackByAlbum"
-    style="display: contents"
-    [album]="album"
-  />
+<div class="album-cards-section">
+  <ng-container *ngIf="isLoadingAlbums()">
+    <app-card-skeleton
+      *ngFor="let i of [1, 2, 3, 4, 5, 6, 7, 8]"
+      width="250px"
+      height="298px"
+    />
+  </ng-container>
+
+  <ng-container *ngIf="albums$ | async">
+    <app-album-card
+      *ngFor="let album of albums()?.items; trackBy: trackByAlbum"
+      style="display: contents"
+      [album]="album"
+    />
+  </ng-container>
 
   <div *ngIf="albums()?.next" class="bnt-container">
-    <button *ngIf="!isLoading" class="primary-button" (click)="loadMore()">
+    <button *ngIf="!isLoadingMore" class="primary-button" (click)="loadMore()">
       Ver mais
     </button>
 
-    <app-circular-loading *ngIf="isLoading" />
+    <app-circular-loading *ngIf="isLoadingMore" />
   </div>
 </div>
 
 <div *ngIf="albums()?.next" class="bnt-container">
-  <button *ngIf="!isLoading" class="primary-button" (click)="loadMore()">
+  <button *ngIf="!isLoadingMore" class="primary-button" (click)="loadMore()">
     Ver mais
   </button>
 
-  <app-circular-loading *ngIf="isLoading" />
+  <app-circular-loading *ngIf="isLoadingMore" />
 </div>

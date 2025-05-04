@@ -12,14 +12,23 @@ export class ArtistAlbumsService {
   readonly #httpClient = inject(HttpClient);
 
   albums = signal<SimplifiedAlbumPaginatedResponse | null>(null);
+  isLoading = signal(false);
 
   getArtistAlbums(artistId: string) {
+    this.isLoading.set(true);
+
     return this.#httpClient
       .get<SimplifiedAlbumPaginatedResponse>(
         `${this.baseUrl}/artists/${artistId}/albums`,
         { params: { limit: 8 } }
       )
-      .pipe(tap((res) => this.albums.set(res)));
+      .pipe(
+        tap((res) => {
+          this.isLoading.set(false);
+
+          this.albums.set(res);
+        })
+      );
   }
 
   getNext() {
